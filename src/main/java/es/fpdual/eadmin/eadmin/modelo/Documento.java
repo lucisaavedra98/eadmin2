@@ -20,7 +20,5 @@ public class Documento extends ElementoBaseAdministracionElectronica {
 	public String toString() {
 		return "Documento con código " + codigo;
 	}
-	
-	
-	
+		
 }
