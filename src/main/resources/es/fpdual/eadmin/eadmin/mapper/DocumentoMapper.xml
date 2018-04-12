@@ -6,7 +6,7 @@
 			codigo,
 			nombre,
 			fechaCreacion,
-			fechaUltima,
+			fechaUltimaActualizacion,
 			esPublico,
 			tipo,
 			estadoDocumento) 

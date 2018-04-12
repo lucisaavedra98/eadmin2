@@ -20,7 +20,6 @@ public abstract class BaseDocumentoMapperTest {
 	private static final String NOMBRE_DOCUMENTO = "nombre";
 	private static final boolean DOCUMENTO_PUBLICO = true;
 	private static final Integer CODIGO_DOCUMENTO = 1;
-	private static final Integer TIPO_DOCUMENTO = 1;
 	private Documento documento;
 
 	@Autowired
@@ -33,7 +32,7 @@ public abstract class BaseDocumentoMapperTest {
 	}
 
 	@Test
-	public void deberiaInertarUnDocumento() throws Exception {
-		assertThat(maper.insertarDocumento(documento),is(1));
+	public void deberiaInsertarUnDocumento() throws Exception {
+		assertThat(this.maper.insertarDocumento(this.documento),is(1));
 	}
 }
