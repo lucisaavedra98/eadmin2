@@ -24,8 +24,8 @@
 	</delete>
 	<update id="modificarDocumento"> 
 		UPDATE Elemento 
-		SET codigo=#{documento.codigo},
-			nombre=#{documento.nombre}, fechaCreacion=#{documento.fechaCreacion},
+		SET nombre=#{documento.nombre},
+			fechaCreacion=#{documento.fechaCreacion},
 			fechaUltimaActualizacion=#{documento.fechaUltimaActualizacion},
 			esPublico=#{documento.publico}, tipo=1,
 			estadoDocumento=#{documento.estado.codigo}
