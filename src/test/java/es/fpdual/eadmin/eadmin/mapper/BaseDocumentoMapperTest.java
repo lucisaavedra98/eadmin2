@@ -58,7 +58,7 @@ public abstract class BaseDocumentoMapperTest {
 	@Test
 	public void deberiaActualizarTodosLosCamposDeUnDocumento() throws Exception {
 		//DECLARACION
-		final Documento documentoActualizado = new Documento(CODIGO_DOCUMENTO, NOMBRE_DOCUMENTO, Utilidades.asDate(LocalDate.of(2015, 2, 1)), Utilidades.asDate(LocalDate.of(2015, 2, 2)),
+		final Documento documentoActualizado = new Documento(CODIGO_DOCUMENTO, "documento2", Utilidades.asDate(LocalDate.of(2015, 2, 1)), Utilidades.asDate(LocalDate.of(2015, 2, 2)),
 				DOCUMENTO_PUBLICO, EstadoDocumento.APROBADO);
 		
 		//ENTRENAMIENTO
@@ -70,7 +70,7 @@ public abstract class BaseDocumentoMapperTest {
 		//VERIFICACION
 		assertThat(resultado,is(1));
 		
-		final Documento documentoModificado = this.maper.consultarDocumento(1);
+		final Documento documentoModificado = this.maper.consultarDocumento(CODIGO_DOCUMENTO);
 		assertThat(documentoModificado,is(documentoActualizado));
 	}
 	
