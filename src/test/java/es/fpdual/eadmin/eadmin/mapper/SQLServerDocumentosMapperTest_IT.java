@@ -1,6 +1,7 @@
 package es.fpdual.eadmin.eadmin.mapper;
 
 import org.junit.runner.*;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;;
 
@@ -9,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;;
 	"classpath:spring-configuracion/eadmin-persistencia.xml",
 	"classpath:spring-configuracion/eadmin-sqlserver-persistencia.xml"
 	})
+@Rollback
 public class SQLServerDocumentosMapperTest_IT extends BaseDocumentoMapperTest {
 	
 }
