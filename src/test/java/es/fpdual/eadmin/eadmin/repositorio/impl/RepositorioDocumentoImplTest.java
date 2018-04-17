@@ -54,6 +54,22 @@ public class RepositorioDocumentoImplTest {
 	}
 
 	@Test
+	public void deberiaDevolverUnoSiLaBaseDeDatosEstaVacia() {		  
+		final int resultado = this.mapper.obtenerElSiguienteIdentificador();
+		
+		assertThat(resultado,is (1));
+	}
+	
+	@Test
+	public void deberiaDevolverDosSiLaBaseDeDatosContieneUnRegistro() {	
+		this.mapper.insertarDocumento(documento);
+		  
+		final int resultado = this.mapper.obtenerElSiguienteIdentificador();
+		
+		assertThat(resultado,is (2));
+	}
+	
+	@Test
 	public void deberiaModificarUnDocumento() {
 		when(mapper.modificarDocumento(this.documento)).thenReturn(1);
 		

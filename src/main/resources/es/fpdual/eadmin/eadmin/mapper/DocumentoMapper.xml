@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="es.fpdual.eadmin.eadmin.mapper.DocumentoMapper">
 	<insert id="insertarDocumento">
+	<selectKey keyProperty="id" keyColumn="codigo" resultType="int" order="BEFORE">
+		<include refid="obtenerElSiguienteIdentificador" /> 
+	</selectKey>
 		INSERT INTO Elemento (
 			codigo,
 			nombre,
@@ -11,7 +14,7 @@
 			tipo,
 			estadoDocumento)
 		VALUES (
-			#{documento.codigo},
+			#{id},
 			#{documento.nombre},
 			#{documento.fechaCreacion},
 			#{documento.fechaUltimaActualizacion},
@@ -36,13 +39,22 @@
 	</update>
 
 	<select id="consultarDocumento" resultMap="documentoResultMap">
-		<include refid="baseSelectDocumento" /> AND codigo=#{codigo}
+		<include refid="baseSelectDocumento" /> 
+		WHERE tipo=1 AND codigo=#{codigo}
 	</select>
 
 	<select id="consultarTodosLosDocumentos" resultMap="documentoResultMap">
-		<include refid="baseSelectDocumento" />
+		<include refid="baseSelectDocumento" /> WHERE tipo=1 
 	</select>
-
+	
+	<select id="obtenerElSiguienteIdentificador" resultType="Integer">
+		SELECT ISNULL(MAX(codigo), 0)+1 FROM Elemento
+	</select>
+	
+	<sql id="obtenerNuevoCodigo">
+		SELECT ISNULL(MAX(codigo), 0)+1 FROM Elemento
+	</sql>
+	
 	<sql id="baseSelectDocumento">
 		SELECT
 			codigo,
@@ -53,7 +65,6 @@
 			tipo,
 			estadoDocumento
 		FROM Elemento
-		WHERE tipo=1
 	</sql>
 
 	<resultMap id="documentoResultMap" type="es.fpdual.eadmin.eadmin.modelo.Documento"
@@ -67,5 +78,6 @@
 			<arg column="estadoDocumento" javaType="es.fpdual.eadmin.eadmin.modelo.EstadoDocumento" />
 		</constructor>
 	</resultMap>
+	
 </mapper>
     

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import es.fpdual.eadmin.eadmin.mapper.DocumentoMapper;
 import es.fpdual.eadmin.eadmin.modelo.Documento;
+import es.fpdual.eadmin.eadmin.modelo.builder.DocumentoBuilder;
 import es.fpdual.eadmin.eadmin.repositorio.RepositorioDocumento;
 
 @Repository
