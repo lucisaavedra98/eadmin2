@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +80,24 @@ public abstract class BaseDocumentoMapperTest {
 		
 		this.maper.insertarDocumento(this.documento);
 		
-		this.maper.consultarDocumento(documento.getCodigo());
+		Documento resultado = this.maper.consultarDocumento(documento.getCodigo());
+		
+		assertEquals(resultado,documento);
+	}
+	
+	@Test
+	public void deberiaRecuperarTodosLosDocumentos() throws Exception {
+		
+		final Documento documento2 = new Documento(2, NOMBRE_DOCUMENTO, FECHA_CREACION, FECHA_ULTIMA_MODIFICACION,
+				DOCUMENTO_PUBLICO, EstadoDocumento.ACTIVO);
+		
+		this.maper.insertarDocumento(this.documento);
+		this.maper.insertarDocumento(documento2);
+		
+		final List<Documento> resultado= this.maper.consultarTodosLosDocumentos();
+		
+		assertThat(resultado,hasSize(2));
+		assertThat(resultado,hasItems(documento,documento2));
 	}
 	
 }

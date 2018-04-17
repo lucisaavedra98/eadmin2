@@ -3,46 +3,59 @@
 <mapper namespace="es.fpdual.eadmin.eadmin.mapper.DocumentoMapper">
 	<insert id="insertarDocumento">
 		INSERT INTO Elemento (
-		codigo,
-		nombre,
-		fechaCreacion,
-		fechaUltimaActualizacion,
-		esPublico,
-		tipo,
-		estadoDocumento)
+			codigo,
+			nombre,
+			fechaCreacion,
+			fechaUltimaActualizacion,
+			esPublico,
+			tipo,
+			estadoDocumento)
 		VALUES (
-		#{documento.codigo},
-		#{documento.nombre},
-		#{documento.fechaCreacion},
-		#{documento.fechaUltimaActualizacion},
-		#{documento.publico},
-		1,
-		#{documento.estado.codigo})
+			#{documento.codigo},
+			#{documento.nombre},
+			#{documento.fechaCreacion},
+			#{documento.fechaUltimaActualizacion},
+			#{documento.publico},
+			1,
+			#{documento.estado.codigo})
 	</insert>
+
 	<delete id="eliminarDocumento">
 		DELETE FROM Elemento WHERE codigo=#{codigo}
 	</delete>
+
 	<update id="modificarDocumento">
 		UPDATE Elemento
 		SET nombre=#{documento.nombre},
-		fechaCreacion=#{documento.fechaCreacion},
-		fechaUltimaActualizacion=#{documento.fechaUltimaActualizacion},
-		esPublico=#{documento.publico}, tipo=1,
-		estadoDocumento=#{documento.estado.codigo}
+			fechaCreacion=#{documento.fechaCreacion},
+			fechaUltimaActualizacion=#{documento.fechaUltimaActualizacion},
+			esPublico=#{documento.publico},
+			tipo=1,
+			estadoDocumento=#{documento.estado.codigo}
 		WHERE codigo=#{documento.codigo}
 	</update>
+
 	<select id="consultarDocumento" resultMap="documentoResultMap">
-		SELECT
-		codigo,
-		nombre,
-		fechaCreacion,
-		fechaUltimaActualizacion,
-		esPublico,
-		tipo,
-		estadoDocumento
-		FROM Elemento
-		WHERE codigo=#{codigo}
+		<include refid="baseSelectDocumento" /> AND codigo=#{codigo}
 	</select>
+
+	<select id="consultarTodosLosDocumentos" resultMap="documentoResultMap">
+		<include refid="baseSelectDocumento" />
+	</select>
+
+	<sql id="baseSelectDocumento">
+		SELECT
+			codigo,
+			nombre,
+			fechaCreacion,
+			fechaUltimaActualizacion,
+			esPublico,
+			tipo,
+			estadoDocumento
+		FROM Elemento
+		WHERE tipo=1
+	</sql>
+
 	<resultMap id="documentoResultMap" type="es.fpdual.eadmin.eadmin.modelo.Documento"
 		autoMapping="false">
 		<constructor>
